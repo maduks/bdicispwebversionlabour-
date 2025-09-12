@@ -241,6 +241,15 @@ export const AuthProvider = ({ children }: Props) => {
   const logout = () => {
     deleteCookie('user');
     deleteCookie('authToken');
+    // Clear persisted Service Provider Registration state
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem('serviceProviderRegForm');
+        localStorage.removeItem('serviceProviderRegStep');
+      } catch (e) {
+        // noop: localStorage may be unavailable
+      }
+    }
     setCurrentUser(null);
     setKycCompleted(false);
     router.push('/login');
