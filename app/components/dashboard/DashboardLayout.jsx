@@ -29,12 +29,13 @@ import {
 
 function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, loading, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
 
   // Role-based access control - only allow artisans (role === "user")
   useEffect(() => {
+    if (loading) return; // Wait for auth to initialize
     if (!currentUser) {
       router.push("/login");
       return;
@@ -46,7 +47,7 @@ function DashboardLayout({ children }) {
       router.push("/user-profile");
       return;
     }
-  }, [currentUser, router]);
+  }, [currentUser, loading, router]);
 
   const handleLogout = () => {
     logout();

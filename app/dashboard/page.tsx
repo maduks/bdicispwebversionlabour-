@@ -15,16 +15,14 @@ import axios from "axios"
 export default function DashboardPage() {
   const { currentUser, loading, kycCompleted } = useAuth()
   const router = useRouter()
-
   const { toast } = useToast()
-
   // Role-based access control - only allow artisans (role === "user")
   useEffect(() => {
     if (!currentUser) {
-      router.push('/login')
+    //  alert("no user")
+    //  router.push('/login')
       return
     }
-
     // Check if user is a seeker (role === "seeker") - redirect to user-profile
     const userRole = currentUser?.data?.role
     if (userRole === "seeker") {
@@ -49,12 +47,9 @@ export default function DashboardPage() {
   const fetchListings = async () => {
     try {
       setLoadings(true)
-      const userCookies = await getCookie('user')
-
-      const userId = JSON.parse(userCookies as string).data?._id
-      console.log("userCookies on dashboard", JSON.parse(userCookies as string).data?._id)
-      if (!userId || !userCookies) {
-        return router.push('/login')
+      const userId = currentUser?.data?._id
+      if (!userId) {
+        return
       }
 
       await axios.get(`https://ministryoflabourbackend.vercel.app/api/v1/listings/all`, {
@@ -62,7 +57,8 @@ export default function DashboardPage() {
           ownerId: userId
         },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+          // Optional: include token if stored in cookies
+          // 'x-access-token': getCookie('authToken') as string
         }
       }).then((response) => {
         if (response.data.data) {
@@ -157,9 +153,11 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    fetchListings()
-    fetchRenewalNotifications()
-  }, [currentUser, router])
+    if (!loading && currentUser) {
+      fetchListings()
+      fetchRenewalNotifications()
+    }
+  }, [currentUser, loading])
 
   useEffect(() => {
     if (!loading && !currentUser) {

@@ -114,8 +114,11 @@ export const AuthProvider = ({ children }: Props) => {
           // Parse the user cookie properly
           const userData = typeof userCookies === 'string' ? JSON.parse(userCookies) : userCookies;
           console.log('Final parsed user data:', userData);
-          setCurrentUser(userData);
-          setKycCompleted(userData?.isKYCVerified || false);
+          // Normalize and set state
+          const normalizedUser = userData?.data ? { data: userData.data } : userData;
+          setCurrentUser(normalizedUser as any);
+          setKycCompleted(Boolean((normalizedUser as any)?.data?.isKYCVerified));
+          setEmailVerified(Boolean((normalizedUser as any)?.data?.isverified));
           console.log('Current user set successfully');
         } else {
           console.log('No user cookies found - user will need to login');
@@ -153,7 +156,8 @@ export const AuthProvider = ({ children }: Props) => {
       } else {
         console.error('No token found in signup response:', newUser);
       }
-      setCookie('user', JSON.stringify(newUser.data.newUser), { 
+      // Store only essential, small user data to avoid cookie size issues
+      setCookie('user', JSON.stringify({ data: newUser.data.newUser }), { 
         maxAge: 60 * 60 * 24 * 2, // 2 days
         path: '/',
         sameSite: 'lax'
@@ -195,7 +199,8 @@ export const AuthProvider = ({ children }: Props) => {
         console.log('Setting user cookie:', user);
         console.log('User role:', user.data?.role);
         
-        const cookieValue = JSON.stringify(user);
+        // Store a minimal user payload to keep cookie small and consistent
+        const cookieValue = JSON.stringify({ data: user.data });
         console.log('Cookie value to be stored:', cookieValue);
         
         setCookie('user', cookieValue, { 

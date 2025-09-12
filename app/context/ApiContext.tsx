@@ -121,9 +121,10 @@ export function ApiProvider({ children }: { children: ReactNode }) {
 
   // Add request interceptor for authentication
   api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    const token = getCookie("token")
+    const token = getCookie("authToken")
     if (token) {
-      config.headers.Authorization = `x-access-token ${token}`
+      // Backend expects x-access-token header
+      (config.headers as any)["x-access-token"] = `${token}`
     }
     return config
   })
@@ -134,10 +135,10 @@ export function ApiProvider({ children }: { children: ReactNode }) {
     (error: AxiosError) => {
       if (error.response?.status === 401) {
         // Handle unauthorized access
-        deleteCookie("token")
+        deleteCookie("authToken")
         deleteCookie("user")
         alert("unauthorized: " + error)
-        window.location.href = "/"
+        window.location.href = "/login"
       }
       return Promise.reject(error)
     }
