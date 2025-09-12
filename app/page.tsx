@@ -341,7 +341,7 @@ Stand out with confidence and enjoy the benefits of verified status!`,
                     </span>
                   </h1>
                   <p className="text-md sm:text-md text-black-600 leading-relaxed max-w-2xl">
-                  Get officially certified by the Ministry of Labour & Works.
+                  Get officially certified by the Ministry of Labour & Employment.
 This certification recognizes your skills, professionalism, and reliability.
 With it, you earn credibility and the trust of employers, clients, and organizations seeking verified professionals and service providers.
                   </p>
