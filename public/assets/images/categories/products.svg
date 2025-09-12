@@ -1,0 +1,23 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F8FAFC"/>
+  
+  <!-- Shopping Bag -->
+  <path d="M300 200H500L450 450H350L300 200Z" fill="#E2E8F0" stroke="#64748B" stroke-width="4"/>
+  
+  <!-- Bag Handles -->
+  <path d="M320 200C320 150 350 120 400 120C450 120 480 150 480 200" stroke="#64748B" stroke-width="4" fill="none"/>
+  
+  <!-- Product Boxes -->
+  <rect x="350" y="250" width="40" height="40" fill="#BAE6FD"/>
+  <rect x="410" y="250" width="40" height="40" fill="#BAE6FD"/>
+  <rect x="350" y="310" width="40" height="40" fill="#BAE6FD"/>
+  <rect x="410" y="310" width="40" height="40" fill="#BAE6FD"/>
+  
+  <!-- Price Tag -->
+  <circle cx="450" cy="220" r="20" fill="#94A3B8"/>
+  <text x="450" y="228" font-family="Arial" font-size="16" fill="white" text-anchor="middle">$</text>
+  
+  <!-- Text -->
+  <text x="400" y="550" font-family="Arial" font-size="24" fill="#334155" text-anchor="middle">Products</text>
+</svg>

@@ -1,0 +1,21 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F8FAFC"/>
+  
+  <!-- Service Icons -->
+  <circle cx="400" cy="200" r="100" fill="#E2E8F0" stroke="#64748B" stroke-width="4"/>
+  
+  <!-- Tools Symbol -->
+  <path d="M350 180L450 280M450 180L350 280" stroke="#94A3B8" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Connection Lines -->
+  <path d="M300 350C300 300 350 320 400 320C450 320 500 300 500 350" stroke="#64748B" stroke-width="4"/>
+  
+  <!-- Service Circles -->
+  <circle cx="300" cy="400" r="40" fill="#BAE6FD"/>
+  <circle cx="400" cy="400" r="40" fill="#BAE6FD"/>
+  <circle cx="500" cy="400" r="40" fill="#BAE6FD"/>
+  
+  <!-- Text -->
+  <text x="400" y="550" font-family="Arial" font-size="24" fill="#334155" text-anchor="middle">Services</text>
+</svg>
