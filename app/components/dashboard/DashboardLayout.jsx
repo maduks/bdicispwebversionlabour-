@@ -122,7 +122,7 @@ function DashboardLayout({ children }) {
                 B
               </div>
               <span className="ml-2 text-xl font-bold text-gradient-primary">
-                BDICP
+                Ministry Of Labour
               </span>
             </Link>
           </div>
