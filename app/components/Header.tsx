@@ -44,7 +44,7 @@ const {currentUser,emailVerified} = useAuth()
               href="/signup"
               className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
             >
-              Signup As Service Provider
+              Register For Trade Test
             </Link>
             {/* <Link
               href="/listings?category=properties"
