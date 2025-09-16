@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import { useAuth } from "@/context/AuthContext"
 import LoginForm from "@/components/auth/LoginForm"
+import { Button } from "../../components/ui/button"
 
 export default function LoginPage() {
   const [error, setError] = useState("")
@@ -95,8 +96,8 @@ export default function LoginPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {error && <div className="bg-red-50 text-red-500 p-3 rounded-lg mb-6">{error}</div>}
-
-          <LoginForm loading={loading} onSubmit={handleLogin} />
+     
+          <LoginForm loading={loading} error={error} onSubmit={handleLogin} />
 
           <div className="mt-6 text-center text-sm">
             <p className="text-muted-foreground">

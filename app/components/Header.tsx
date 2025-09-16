@@ -46,30 +46,7 @@ const {currentUser,emailVerified} = useAuth()
             >
               Register For Trade Test
             </Link>
-            {/* <Link
-              href="/listings?category=properties"
-              className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
-            >
-              Properties
-            </Link> */}
-            {/* <Link
-              href="/listings?category=businesses"
-              className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
-            >
-              Businesses
-            </Link>
-            <Link
-              href="/listings?category=services"
-              className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
-            >
-              Services
-            </Link>
-            <Link
-              href="/listings?category=products"
-              className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
-            >
-              Products
-            </Link> */}
+       
           </div>
           <div className="flex flex-1 justify-end items-center gap-4">
             {mounted && (
@@ -91,7 +68,7 @@ const {currentUser,emailVerified} = useAuth()
             </button>
           </div>
 
-          {currentUser  ? (
+          {currentUser  &&  emailVerified? (
               <Link href={currentUser?.data?.newUser?.role === "seeker" ? "/user-profile" : "/dashboard"} className="hidden md:block">
                 <Button className="rounded-full ml-5 text-white gradient-primary hover:opacity-90">
                   <User className="h-4 w-4 mr-2" />

@@ -5,6 +5,10 @@ import VerifyEmail from "@/components/auth/VerifyEmail";
 import { useEffect, useState, Suspense } from "react";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import { m } from "framer-motion";
+import { toast, Toaster } from "sonner";
+import { set } from "date-fns";
+
 // Client component that uses useSearchParams
 function VerifyEmailContent() {
   const router = useRouter();
@@ -23,10 +27,12 @@ function VerifyEmailContent() {
       })
       .then((res) => {
         console.log(res.data.message);
+
         if (res.data.message === "Account verified sucessfully!") {
           setVerifying(false);
           setSuccess(true);
           setMessage("Email verified successfully!");
+
           // Check if there's a redirect URL stored
           const redirectUrl = sessionStorage.getItem(
             "redirectAfterVerification"
@@ -39,18 +45,48 @@ function VerifyEmailContent() {
           }
           return;
         }
+        toast.error("Invalid Code!!");
         setMessage("Invalid Code!!");
-        console.log;
+        setVerifying(false);
       })
       .catch((err) => {
-        console.log(err);
+        setVerifying(false);
+        console.log(err.response.data.errors);
+        if (err.response.data.errors == "Invalid code") {
+          toast.error("Invalid Code!!");
+        }
         setMessage("Couldn't verify email!, check code and try again");
       });
   };
 
   const handleResend = async () => {
     await new Promise((res) => setTimeout(res, 1000));
-    setMessage("A new code has been sent to your email.");
+    axios
+      .post(
+        "https://ministryoflabourbackend.vercel.app/api/v1/auth/resend-verify-code",
+        {
+          email: email,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+
+        setMessage("A new code has been sent to your email.");
+
+        if (
+          res.data.message ===
+          "Account verification code have been sent to your email."
+        ) {
+          setMessage("Email sent successfully!");
+          toast.success("A new code has been sent to your email.");
+        } else {
+          setMessage("Couldn't send email!, try again");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage("Couldn't send email!, try again");
+      });
   };
 
   if (success) {
@@ -92,6 +128,12 @@ function VerifyEmailLoading() {
 export default function VerifyEmailPage() {
   return (
     <Suspense fallback={<VerifyEmailLoading />}>
+      <Toaster position="top-right" />
+      {/* {message && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50">
+          {message}
+        </div>
+      )} */}
       <VerifyEmailContent />
     </Suspense>
   );

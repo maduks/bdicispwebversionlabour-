@@ -16,15 +16,19 @@ import {
 } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-
+import { useRouter } from "next/navigation";
+import axios from "axios";
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(1, "Password is required"),
   rememberMe: z.boolean().optional(),
 });
 
-function LoginForm({ onSubmit, loading }) {
+function LoginForm({ onSubmit, loading, error }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -38,10 +42,47 @@ function LoginForm({ onSubmit, loading }) {
   const handleSubmit = (values) => {
     onSubmit(values.email, values.password);
   };
+  const handleVerify = () => {
+    setIsLoading(true);
+    axios
+      .post(
+        "https://ministryoflabourbackend.vercel.app/api/v1/auth/getUserByEmail",
+        {
+          email: form.getValues().email,
+        }
+      )
+      .then((res) => {
+        router.push(
+          "/verify-email?email=" +
+            form.getValues().email +
+            "&userID=" +
+            res.data.user._id
+        );
+        setIsLoading(false);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        {error == "Kindly Verify your account." && (
+          <div className="text-red-500  rounded-lg mb-3">
+            <Button
+              style={{ width: "100%" }}
+              className="text-white  gradient-primary hover:opacity-90"
+              onClick={handleVerify}
+              disabled={isLoading}
+            >
+              {isLoading ? "Requesting..." : "Verify Email"}
+            </Button>
+          </div>
+        )}
+
         <FormField
           control={form.control}
           name="email"
