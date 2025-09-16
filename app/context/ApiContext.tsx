@@ -339,13 +339,13 @@ export function ApiProvider({ children }: { children: ReactNode }) {
 
   // Add getBankList implementation
   const getBankList = async (): Promise<any[]> => {
-    const response = await axios.post("http://13.60.216.170:8000/api/collection/get-banks");
+    const response = await axios.post("/kyc/getBankList");
     return response.data?.data?.banks || [];
   };
 
   // Add validateAccountNumber implementation
   const validateAccountNumber = async (accountNumber: string, bankUID: string, amount: number = 50): Promise<any> => {
-    const response = await axios.post("http://13.60.216.170:8000/api/collection/validate-account", {
+    const response = await axios.post("/kyc/validateAccountNumber", {
       accountNumber,
       amount,
       bankUID,
