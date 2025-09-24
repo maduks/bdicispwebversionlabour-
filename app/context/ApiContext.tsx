@@ -336,16 +336,15 @@ export function ApiProvider({ children }: { children: ReactNode }) {
     // Map API response to UI attributes
     return response.data.data 
   };
-
   // Add getBankList implementation
   const getBankList = async (): Promise<any[]> => {
-    const response = await axios.post("/kyc/getBankList");
+    const response = await api.post("/kyc/getBankList");
     return response.data?.data?.banks || [];
   };
 
   // Add validateAccountNumber implementation
   const validateAccountNumber = async (accountNumber: string, bankUID: string, amount: number = 50): Promise<any> => {
-    const response = await axios.post("/kyc/validateAccountNumber", {
+    const response = await api.post("/kyc/validateAccountNumber", {
       accountNumber,
       amount,
       bankUID,

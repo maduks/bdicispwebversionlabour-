@@ -450,7 +450,7 @@ const EnhancedCertificate = React.forwardRef((props, ref) => {
             zIndex: 1,
           }}
         >
-          <p>{props.ministryId.name}</p>
+          <p>Ministry Of Labour & Employment</p>
         </div>
 
         {/* Header with enhanced styling */}

@@ -959,11 +959,11 @@ export default function EditServiceProviderPage() {
                 </div>
               </div>
             </div>
-            <div className="font-semibold mt-10 mb-5">License Information</div>
+            <div className="font-semibold mt-10 mb-5">Trade Test</div>
             {form.licenses.map((lic: any, idx: number) => (
               <div key={idx} className="border-b pb-4 mb-4">
                 <div>
-                  <Label>License Name</Label>
+                  <Label>Test Name</Label>
                   <Input value={lic.name} onChange={e => setForm((f: any) => {
                     const licenses = [...f.licenses];
                     licenses[idx].name = e.target.value;
@@ -971,7 +971,7 @@ export default function EditServiceProviderPage() {
                   })} />
                 </div>
                 <div>
-                  <Label>License Number</Label>
+                  <Label>Test Number / ID</Label>
                   <Input value={lic.number} onChange={e => setForm((f: any) => {
                     const licenses = [...f.licenses];
                     licenses[idx].number = e.target.value;

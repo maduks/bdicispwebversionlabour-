@@ -852,11 +852,11 @@ export default function ServiceProviderRegistrationPage() {
                 </div>
               </div>
             </div>
-            <div className="font-semibold mt-10 mb-5">License Information</div>
+            <div className="font-semibold mt-10 mb-5">Trade Test</div>
             {form.licenses.map((lic: any, idx: number) => (
               <div key={idx} className="border-b pb-4 mb-4">
                 <div>
-                  <Label>License Name</Label>
+                  <Label>Test Name</Label>
                   <Input value={lic.name} onChange={e => setForm((f: any) => {
                     const licenses = [...f.licenses];
                     licenses[idx].name = e.target.value;
@@ -864,7 +864,7 @@ export default function ServiceProviderRegistrationPage() {
                   })} />
                 </div>
                 <div>
-                  <Label>License Number</Label>
+                  <Label>Test Number / ID</Label>
                   <Input value={lic.number} onChange={e => setForm((f: any) => {
                     const licenses = [...f.licenses];
                     licenses[idx].number = e.target.value;
@@ -914,7 +914,7 @@ export default function ServiceProviderRegistrationPage() {
                   <Label>Document (Upload)</Label>
                   <ImageDocumentUploadStepper
                     imageSteps={[]}
-                    documentSteps={[{ label: "License Document", name: `licenseDoc_${idx}` }]}
+                    documentSteps={[{ label: "Test Document", name: `licenseDoc_${idx}` }]}
                     onComplete={urls => setForm((f: any) => {
                       const licenses = [...f.licenses];
                       licenses[idx].document = urls[`licenseDoc_${idx}`];
@@ -924,11 +924,11 @@ export default function ServiceProviderRegistrationPage() {
                   {lic.document && <a href={lic.document} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline mt-2 block">View Uploaded Document</a>}
                 </div>
                 {form.licenses.length > 1 && (
-                  <Button variant="destructive" onClick={() => setForm((f: any) => ({ ...f, licenses: f.licenses.filter((_: any, i: number) => i !== idx) }))} className="mt-2">Remove License</Button>
+                  <Button variant="destructive" onClick={() => setForm((f: any) => ({ ...f, licenses: f.licenses.filter((_: any, i: number) => i !== idx) }))} className="mt-2">Remove Test</Button>
                 )}
               </div>
             ))}
-            <Button variant="outline" onClick={() => setForm((f: any) => ({ ...f, licenses: [...f.licenses, { name: "", number: "", authority: "", issued: "", expires: "", document: "", noExpiry: false }] }))}>Add License</Button>
+            <Button variant="outline" onClick={() => setForm((f: any) => ({ ...f, licenses: [...f.licenses, { name: "", number: "", authority: "", issued: "", expires: "", document: "", noExpiry: false }] }))}>Add Test</Button>
           </div>
         );
       case 5:

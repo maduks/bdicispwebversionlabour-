@@ -679,10 +679,10 @@ With it, you earn credibility and the trust of employers, clients, and organizat
                 Explore Opportunities
               </Badge>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                Earn Money As An Agent
+                Earn Money As A Registration Officer
               </h2>
               <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Join the Benue State Certification Network as a registered agent and earn income by helping others get certified.
+              Join the Benue State Certification Network as a registration officer and earn income by helping others get certified.
               </p>
             </AnimatedSection>
             <div className="grid ">
